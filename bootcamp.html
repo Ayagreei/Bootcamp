@@ -1,0 +1,1776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kids Robotics Bootcamp</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #2ecc71;
+            --warning: #f39c12;
+        }
+        F
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            background-attachment: fixed;
+            color: var(--dark);
+            line-height: 1.6;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.05"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="2" fill="white"/><circle cx="20" cy="20" r="1" fill="white"/><circle cx="80" cy="80" r="1" fill="white"/><circle cx="30" cy="70" r="1" fill="white"/><circle cx="70" cy="30" r="1" fill="white"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, rgba(44, 62, 80, 0.9), rgba(52, 152, 219, 0.9));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border-radius: 0 0 15px 15px;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.1"><path d="M20,20 Q40,5 60,20 T100,20" stroke="white" fill="none" stroke-width="2"/><path d="M0,50 Q20,35 40,50 T80,50" stroke="white" fill="none" stroke-width="2"/><path d="M10,80 Q30,65 50,80 T90,80" stroke="white" fill="none" stroke-width="2"/></svg>');
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            border-radius: 50px;
+            padding: 5px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .nav-tab {
+            padding: 1rem 2rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border-radius: 50px;
+            flex: 1;
+            text-align: center;
+        }
+        
+        .nav-tab.active {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.4);
+        }
+        
+        .tab-content {
+            display: none;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            backdrop-filter: blur(5px);
+            margin-bottom: 2rem;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Home Page Styles */
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(52, 152, 219, 0.8)), url('https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        
+        .cta-button {
+            background-color: var(--accent);
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(231, 76, 60, 0.4);
+        }
+        
+        .cta-button:hover {
+            background-color: #c0392b;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(231, 76, 60, 0.5);
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .program-details {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+        
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .testimonial {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+            color: var(--secondary);
+        }
+        
+        .section {
+            margin-bottom: 3rem;
+        }
+        
+        .section-title {
+            color: var(--primary);
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+        
+        .camp-dates {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .date-card {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--secondary);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .date-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .date-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .schedule {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .schedule-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .schedule-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .schedule-time {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .age-groups {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .age-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .age-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .age-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .age-card ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .learning-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .learning-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .learning-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .learning-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .learning-card h3 i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+        
+        .materials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .materials-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .materials-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .location-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .location-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .faq-container {
+            margin-bottom: 2rem;
+        }
+        
+        .faq-item {
+            background: white;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background: #f8f9fa;
+        }
+        
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            max-height: 500px;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        .cta-section {
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        /* Enhanced Registration Styles */
+        .registration-container {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .form-container {
+            flex: 2;
+        }
+        
+        .form-sidebar {
+            flex: 1;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .form-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .form-header h2 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .form-header p {
+            color: #666;
+        }
+        
+        .form-progress {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .form-progress::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #e0e0e0;
+            z-index: 1;
+        }
+        
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step-number {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .progress-step.active .step-number {
+            background: var(--secondary);
+            color: white;
+            box-shadow: 0 0 0 5px rgba(52, 152, 219, 0.2);
+        }
+        
+        .progress-step.completed .step-number {
+            background: var(--success);
+            color: white;
+        }
+        
+        .step-label {
+            font-size: 0.85rem;
+            color: #666;
+            text-align: center;
+        }
+        
+        .progress-step.active .step-label {
+            color: var(--secondary);
+            font-weight: bold;
+        }
+        
+        .form-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .form-section.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .form-group .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 40px;
+            color: #999;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 2.5rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+            outline: none;
+        }
+        
+        textarea {
+            padding-left: 1rem;
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.4);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(52, 152, 219, 0.5);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--secondary);
+            border: 2px solid var(--secondary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .form-sidebar h3 {
+            margin-bottom: 1rem;
+            border-bottom: 2px solid rgba(255,255,255,0.2);
+            padding-bottom: 0.5rem;
+        }
+        
+        .sidebar-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+        
+        .sidebar-features li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .sidebar-features i {
+            color: var(--accent);
+            margin-top: 3px;
+        }
+        
+        .testimonial-sidebar {
+            background: rgba(255,255,255,0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .review-section {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .review-section h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 0.5rem;
+        }
+        
+        .review-item {
+            margin-bottom: 0.5rem;
+            display: flex;
+        }
+        
+        .review-item strong {
+            min-width: 150px;
+        }
+        
+        footer {
+            background-color: rgba(44, 62, 80, 0.9);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 2rem;
+            border-radius: 15px 15px 0 0;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-links a {
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .nav-tabs {
+                flex-direction: column;
+                border-radius: 10px;
+            }
+            
+            .nav-tab {
+                text-align: center;
+            }
+            
+            .registration-container {
+                flex-direction: column;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        .robot-icon {
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><span class="robot-icon">🤖</span> Kids Robotics Bootcamp</h1>
+            <p>Inspiring the next generation of innovators through hands-on robotics education</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="nav-tabs">
+            <div class="nav-tab active" data-tab="home">Home</div>
+            <div class="nav-tab" data-tab="registration">Registration</div>
+            <div class="nav-tab" data-tab="admin">Admin Panel</div>
+        </div>
+        
+        <!-- Home Tab -->
+        <div id="home" class="tab-content active">
+            <div class="hero">
+                <h2>Welcome to Robotic Kids Bootcamp!</h2>
+                <p>Where young innovators build, code, and create the future through robotics</p>
+                <button class="cta-button" onclick="switchTab('registration')">Enroll Now</button>
+            </div>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>Hands-On Robotics</h3>
+                    <p>Build and program real robots using cutting-edge technology and tools</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">💻</div>
+                    <h3>Coding Skills</h3>
+                    <p>Learn programming fundamentals through visual and block-based coding</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Future Ready</h3>
+                    <p>Develop problem-solving and critical thinking skills for tomorrow's challenges</p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title"><i class="fas fa-info-circle"></i> Bootcamp Information</h2>
+                <p>Everything you need to know about our exciting robotics program for kids</p>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title"><i class="fas fa-calendar-alt"></i> Camp Dates & Times</h2>
+                <h3>Summer Session 2024</h3>
+                <div class="camp-dates">
+                    <div class="date-card">
+                        <h3>Week 1: July 8-12, 2024</h3>
+                        <p><strong>Introduction to Robotics</strong></p>
+                    </div>
+                    <div class="date-card">
+                        <h3>Week 2: July 15-19, 2024</h3>
+                        <p><strong>Advanced Building & Coding</strong></p>
+                    </div>
+                    <div class="date-card">
+                        <h3>Week 3: August 5-9, 2024</h3>
+                        <p><strong>Competition & Projects</strong></p>
+                    </div>
+                </div>
+                
+                <h3>Daily Schedule</h3>
+                <div class="schedule">
+                    <div class="schedule-item">
+                        <div class="schedule-time">9:00 AM - 12:00 PM</div>
+                        <p><strong>Morning Session (Ages 6-9)</strong></p>
+                    </div>
+                    <div class="schedule-item">
+                        <div class="schedule-time">1:00 PM - 4:00 PM</div>
+                        <p><strong>Afternoon Session (Ages 10-14)</strong></p>
+                    </div>
+                    <div class="schedule-item">
+                        <div class="schedule-time">5 Days per Week</div>
+                        <p><strong>Monday - Friday</strong></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title"><i class="fas fa-users"></i> Age Groups & Sessions</h2>
+                <div class="age-groups">
+                    <div class="age-card">
+                        <h3>6-9 Years: Junior Builders</h3>
+                        <p>Perfect for beginners! Kids will learn basic robotics concepts through fun, hands-on activities.</p>
+                        <ul>
+                            <li>Simple robot construction</li>
+                            <li>Visual block coding</li>
+                            <li>Team collaboration</li>
+                            <li>Max 12 students per session</li>
+                        </ul>
+                    </div>
+                    <div class="age-card">
+                        <h3>10-14 Years: Tech Masters</h3>
+                        <p>Advanced program for kids ready to dive deeper into robotics and programming.</p>
+                        <ul>
+                            <li>Advanced robot design</li>
+                            <li>Python & Scratch coding</li>
+                            <li>Sensor integration</li>
+                            <li>Max 10 students per session</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title"><i class="fas fa-graduation-cap"></i> What Kids Will Learn</h2>
+                <div class="learning-grid">
+                    <div class="learning-card">
+                        <h3><i class="fas fa-robot"></i> Robot Building</h3>
+                        <ul>
+                            <li>Mechanical design principles</li>
+                            <li>Motor and gear systems</li>
+                            <li>Structural engineering basics</li>
+                            <li>Problem-solving through design</li>
+                        </ul>
+                    </div>
+                    <div class="learning-card">
+                        <h3><i class="fas fa-code"></i> Programming</h3>
+                        <ul>
+                            <li>Block-based coding (Scratch)</li>
+                            <li>Introduction to Python</li>
+                            <li>Logic and algorithms</li>
+                            <li>Debugging techniques</li>
+                        </ul>
+                    </div>
+                    <div class="learning-card">
+                        <h3><i class="fas fa-bolt"></i> Electronics</h3>
+                        <ul>
+                            <li>Sensors and actuators</li>
+                            <li>Circuit basics</li>
+                            <li>Arduino/microcontrollers</li>
+                            <li>Real-world applications</li>
+                        </ul>
+                    </div>
+                    <div class="learning-card">
+                        <h3><i class="fas fa-brain"></i> Soft Skills Development</h3>
+                        <ul>
+                            <li>Teamwork and collaboration</li>
+                            <li>Creative problem-solving</li>
+                            <li>Critical thinking</li>
+                            <li>Presentation skills</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title"><i class="fas fa-tools"></i> Required Materials</h2>
+                <div class="materials">
+                    <div class="materials-card">
+                        <h3>Included in Camp Fee:</h3>
+                        <ul>
+                            <li>All robotics kits and components</li>
+                            <li>Laptop/tablet for programming</li>
+                            <li>Course materials and workbook</li>
+                            <li>Camp t-shirt</li>
+                        </ul>
+                    </div>
+                    <div class="materials-card">
+                        <h3>Please Bring:</h3>
+                        <ul>
+                            <li>Water bottle</li>
+                            <li>Snacks for break time</li>
+                            <li>Comfortable clothes</li>
+                            <li>Enthusiasm and creativity!</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title"><i class="fas fa-map-marker-alt"></i> Location</h2>
+                <div class="location-card">
+                    <h3>Innovation Tech Center</h3>
+                    <p>📍 123 Technology Drive</p>
+                    <p>Building B, 2nd Floor</p>
+                    <p>Silicon Valley, CA 94025</p>
+                    
+                    <h4 style="margin-top: 1.5rem;">Facility Features:</h4>
+                    <ul>
+                        <li>Modern robotics lab</li>
+                        <li>Air-conditioned classrooms</li>
+                        <li>Free parking available</li>
+                        <li>Near public transportation</li>
+                    </ul>
+                    
+                    <p style="margin-top: 1rem;"><strong>Drop-off & Pick-up:</strong> Please use the main entrance. Staff will be available 15 minutes before and after each session.</p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title"><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            What is the cost of the bootcamp?
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Please contact us for current pricing and any available discounts for multiple weeks or siblings.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Does my child need prior experience?
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>No prior experience is required! We welcome beginners and adjust instruction based on each child's skill level.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            What is your cancellation policy?
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Full refunds are available up to 30 days before the session start date. After that, partial refunds may be available.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            What is the instructor-to-student ratio?
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We maintain a 1:6 instructor-to-student ratio to ensure personalized attention for each child.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Can my child attend multiple weeks?
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes! Each week builds on previous concepts, so attending multiple weeks enhances the learning experience.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            What safety measures are in place?
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>All equipment is child-safe, and we have certified first-aid staff on-site. We follow strict safety protocols.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Will my child take home a robot?
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>While the advanced robotics kits remain at the center, children will create projects and receive digital portfolios of their work.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Do you offer any scholarships or financial aid?
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes, we offer limited scholarships based on financial need. Please contact us for application details.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 style="text-align: center; margin: 2rem 0;">What Parents & Students Say</h2>
+            <div class="testimonials">
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        "My daughter went from being scared of technology to building her own robot! The instructors are amazing."
+                    </div>
+                    <div class="testimonial-author">- Sarah Johnson, Parent</div>
+                </div>
+                
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        "I made new friends and learned how to code. Now I want to be a robotics engineer when I grow up!"
+                    </div>
+                    <div class="testimonial-author">- Alex, Age 12</div>
+                </div>
+                
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        "The bootcamp sparked my son's interest in STEM. His problem-solving skills have improved dramatically."
+                    </div>
+                    <div class="testimonial-author">- Michael Chen, Parent</div>
+                </div>
+            </div>
+            
+            <div class="cta-section">
+                <h2>Ready to Join the Fun?</h2>
+                <p>Spots are filling up fast! Register your child today and give them an unforgettable summer of learning and creativity.</p>
+                <button class="cta-button" onclick="switchTab('registration')">Register Now</button>
+            </div>
+        </div>
+        
+        <!-- Registration Tab -->
+        <div id="registration" class="tab-content">
+            <div class="registration-container">
+                <div class="form-container">
+                    <div class="form-header">
+                        <h2><i class="fas fa-robot"></i> Register for Robotics Bootcamp</h2>
+                        <p>Complete the form below to secure your child's spot in our exciting program</p>
+                    </div>
+                    
+                    <div class="form-progress">
+                        <div class="progress-step active" data-step="1">
+                            <div class="step-number">1</div>
+                            <div class="step-label">Child Info</div>
+                        </div>
+                        <div class="progress-step" data-step="2">
+                            <div class="step-number">2</div>
+                            <div class="step-label">Parent Info</div>
+                        </div>
+                        <div class="progress-step" data-step="3">
+                            <div class="step-number">3</div>
+                            <div class="step-label">Program Details</div>
+                        </div>
+                        <div class="progress-step" data-step="4">
+                            <div class="step-number">4</div>
+                            <div class="step-label">Review & Submit</div>
+                        </div>
+                    </div>
+                    
+                    <div id="registration-alert"></div>
+                    
+                    <form id="registration-form">
+                        <!-- Step 1: Child Information -->
+                        <div class="form-section active" data-step="1">
+                            <h3>Child Information</h3>
+                            <p class="form-description">Tell us about your child</p>
+                            
+                            <div class="form-group">
+                                <label for="child-name">Child's Full Name</label>
+                                <div class="input-icon">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <input type="text" id="child-name" name="child-name" required placeholder="Enter child's full name">
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="child-age">Child's Age</label>
+                                    <div class="input-icon">
+                                        <i class="fas fa-birthday-cake"></i>
+                                    </div>
+                                    <input type="number" id="child-age" name="child-age" min="6" max="16" required placeholder="Age">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="child-gender">Gender</label>
+                                    <div class="input-icon">
+                                        <i class="fas fa-venus-mars"></i>
+                                    </div>
+                                    <select id="child-gender" name="child-gender">
+                                        <option value="">Select gender</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="other">Other</option>
+                                        <option value="prefer-not-to-say">Prefer not to say</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <div></div> <!-- Empty div for spacing -->
+                                <button type="button" class="btn btn-primary next-step" data-next="2">
+                                    Next <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 2: Parent Information -->
+                        <div class="form-section" data-step="2">
+                            <h3>Parent/Guardian Information</h3>
+                            <p class="form-description">Tell us how we can contact you</p>
+                            
+                            <div class="form-group">
+                                <label for="parent-name">Parent/Guardian Name</label>
+                                <div class="input-icon">
+                                    <i class="fas fa-user-tie"></i>
+                                </div>
+                                <input type="text" id="parent-name" name="parent-name" required placeholder="Enter your full name">
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="email">Email Address</label>
+                                    <div class="input-icon">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="phone">Phone Number</label>
+                                    <div class="input-icon">
+                                        <i class="fas fa-phone"></i>
+                                    </div>
+                                    <input type="tel" id="phone" name="phone" required placeholder="(555) 123-4567">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="relationship">Relationship to Child</label>
+                                <div class="input-icon">
+                                    <i class="fas fa-heart"></i>
+                                </div>
+                                <select id="relationship" name="relationship">
+                                    <option value="">Select relationship</option>
+                                    <option value="parent">Parent</option>
+                                    <option value="guardian">Guardian</option>
+                                    <option value="grandparent">Grandparent</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-outline prev-step" data-prev="1">
+                                    <i class="fas fa-arrow-left"></i> Back
+                                </button>
+                                <button type="button" class="btn btn-primary next-step" data-next="3">
+                                    Next <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 3: Program Details -->
+                        <div class="form-section" data-step="3">
+                            <h3>Program Details</h3>
+                            <p class="form-description">Select your preferred program options</p>
+                            
+                            <div class="form-group">
+                                <label for="experience">Previous Robotics Experience</label>
+                                <div class="input-icon">
+                                    <i class="fas fa-cogs"></i>
+                                </div>
+                                <select id="experience" name="experience">
+                                    <option value="none">None - First time with robotics</option>
+                                    <option value="beginner">Beginner - Some exposure to robotics</option>
+                                    <option value="intermediate">Intermediate - Built simple robots before</option>
+                                    <option value="advanced">Advanced - Programmed robots before</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="session">Preferred Session</label>
+                                <div class="input-icon">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </div>
+                                <select id="session" name="session" required>
+                                    <option value="">Select a session</option>
+                                    <option value="summer">Summer Bootcamp (June-July)</option>
+                                    <option value="fall">Fall Program (September-October)</option>
+                                    <option value="winter">Winter Workshop (December)</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="week-selection">Select Weeks (Summer Session Only)</label>
+                                <div class="input-icon">
+                                    <i class="fas fa-calendar-week"></i>
+                                </div>
+                                <select id="week-selection" name="week-selection">
+                                    <option value="week1">Week 1: July 8-12 (Introduction to Robotics)</option>
+                                    <option value="week2">Week 2: July 15-19 (Advanced Building & Coding)</option>
+                                    <option value="week3">Week 3: August 5-9 (Competition & Projects)</option>
+                                    <option value="all">All Three Weeks (Save 15%)</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="allergies">Allergies or Medical Conditions</label>
+                                <div class="input-icon">
+                                    <i class="fas fa-heartbeat"></i>
+                                </div>
+                                <textarea id="allergies" name="allergies" rows="3" placeholder="Please list any allergies, medical conditions, or special needs we should be aware of"></textarea>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-outline prev-step" data-prev="2">
+                                    <i class="fas fa-arrow-left"></i> Back
+                                </button>
+                                <button type="button" class="btn btn-primary next-step" data-next="4">
+                                    Next <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 4: Review & Submit -->
+                        <div class="form-section" data-step="4">
+                            <h3>Review & Submit</h3>
+                            <p class="form-description">Please review your information before submitting</p>
+                            
+                            <div class="review-section">
+                                <h4>Child Information</h4>
+                                <div class="review-item">
+                                    <strong>Name:</strong> <span id="review-child-name">-</span>
+                                </div>
+                                <div class="review-item">
+                                    <strong>Age:</strong> <span id="review-child-age">-</span>
+                                </div>
+                                <div class="review-item">
+                                    <strong>Gender:</strong> <span id="review-child-gender">-</span>
+                                </div>
+                                
+                                <h4>Parent Information</h4>
+                                <div class="review-item">
+                                    <strong>Name:</strong> <span id="review-parent-name">-</span>
+                                </div>
+                                <div class="review-item">
+                                    <strong>Email:</strong> <span id="review-email">-</span>
+                                </div>
+                                <div class="review-item">
+                                    <strong>Phone:</strong> <span id="review-phone">-</span>
+                                </div>
+                                <div class="review-item">
+                                    <strong>Relationship:</strong> <span id="review-relationship">-</span>
+                                </div>
+                                
+                                <h4>Program Details</h4>
+                                <div class="review-item">
+                                    <strong>Experience Level:</strong> <span id="review-experience">-</span>
+                                </div>
+                                <div class="review-item">
+                                    <strong>Session:</strong> <span id="review-session">-</span>
+                                </div>
+                                <div class="review-item">
+                                    <strong>Weeks:</strong> <span id="review-weeks">-</span>
+                                </div>
+                                <div class="review-item">
+                                    <strong>Medical Notes:</strong> <span id="review-allergies">-</span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="comments">Additional Comments</label>
+                                <textarea id="comments" name="comments" rows="3" placeholder="Any additional information or questions you'd like to share"></textarea>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-outline prev-step" data-prev="3">
+                                    <i class="fas fa-arrow-left"></i> Back
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-paper-plane"></i> Submit Registration
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="form-sidebar">
+                    <h3>Why Choose Our Bootcamp?</h3>
+                    <ul class="sidebar-features">
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <strong>Expert Instructors</strong>
+                                <p>Certified educators with robotics expertise</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <strong>Small Class Sizes</strong>
+                                <p>Max 12 students for personalized attention</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <strong>Hands-On Learning</strong>
+                                <p>Build and program real robots</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <strong>Modern Equipment</strong>
+                                <p>State-of-the-art robotics kits and tools</p>
+                            </div>
+                        </li>
+                    </ul>
+                    
+                    <h3>What Parents Say</h3>
+                    <div class="testimonial-sidebar">
+                        <div class="testimonial-text">
+                            "My son went from being scared of technology to building his own robot! The instructors are amazing."
+                        </div>
+                        <div class="testimonial-author">- Sarah Johnson, Parent</div>
+                    </div>
+                    
+                    <div class="testimonial-sidebar">
+                        <div class="testimonial-text">
+                            "The bootcamp sparked my daughter's interest in STEM. Her problem-solving skills have improved dramatically."
+                        </div>
+                        <div class="testimonial-author">- Michael Chen, Parent</div>
+                    </div>
+                    
+                    <div class="contact-info">
+                        <h3>Questions?</h3>
+                        <p><i class="fas fa-envelope"></i> info@kidsrobotics.com</p>
+                        <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Admin Tab -->
+        <div id="admin" class="tab-content">
+            <h2>Admin Panel</h2>
+            <p>Access registration data and manage bootcamp participants.</p>
+            
+            <div class="admin-login">
+                <h3>Admin Login</h3>
+                <form id="admin-login-form">
+                    <div class="form-group">
+                        <label for="admin-username">Username</label>
+                        <input type="text" id="admin-username" name="admin-username" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="admin-password">Password</label>
+                        <input type="password" id="admin-password" name="admin-password" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+            </div>
+            
+            <div id="admin-content" style="display: none;">
+                <h3>Registered Participants</h3>
+                <button id="export-data" class="btn btn-primary">Export Data</button>
+                <div id="registrations-table-container"></div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Kids Robotics Bootcamp</h3>
+                    <p>Inspiring the next generation of innovators through hands-on robotics education.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" onclick="switchTab('home')">Home</a></li>
+                        <li><a href="#" onclick="switchTab('registration')">Register Now</a></li>
+                        <li><a href="#" onclick="switchTab('admin')">Dashboard</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>📧 info@kidsrobotics.com</p>
+                    <p>📞 (555) 123-4567</p>
+                    <p>📍 123 Technology Drive, Silicon Valley, CA</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2024 Kids Robotics Bootcamp. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tab switching functionality
+        function switchTab(tabName) {
+            // Remove active class from all tabs and content
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            
+            // Add active class to clicked tab and corresponding content
+            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+        
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                switchTab(tab.dataset.tab);
+            });
+        });
+        
+        // FAQ dropdown functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentNode;
+                item.classList.toggle('active');
+            });
+        });
+        
+        // Multi-step form functionality
+        document.querySelectorAll('.next-step').forEach(button => {
+            button.addEventListener('click', function() {
+                const currentStep = this.closest('.form-section').dataset.step;
+                const nextStep = this.dataset.next;
+                
+                // Validate current step before proceeding
+                if (validateStep(currentStep)) {
+                    // Update progress steps
+                    document.querySelector(`.progress-step[data-step="${currentStep}"]`).classList.remove('active');
+                    document.querySelector(`.progress-step[data-step="${currentStep}"]`).classList.add('completed');
+                    document.querySelector(`.progress-step[data-step="${nextStep}"]`).classList.add('active');
+                    
+                    // Switch form sections
+                    document.querySelector('.form-section.active').classList.remove('active');
+                    document.querySelector(`.form-section[data-step="${nextStep}"]`).classList.add('active');
+                    
+                    // Update review section if we're on the last step
+                    if (nextStep === '4') {
+                        updateReviewSection();
+                    }
+                }
+            });
+        });
+        
+        document.querySelectorAll('.prev-step').forEach(button => {
+            button.addEventListener('click', function() {
+                const currentStep = this.closest('.form-section').dataset.step;
+                const prevStep = this.dataset.prev;
+                
+                // Update progress steps
+                document.querySelector(`.progress-step[data-step="${currentStep}"]`).classList.remove('active');
+                document.querySelector(`.progress-step[data-step="${prevStep}"]`).classList.add('active');
+                document.querySelector(`.progress-step[data-step="${prevStep}"]`).classList.remove('completed');
+                
+                // Switch form sections
+                document.querySelector('.form-section.active').classList.remove('active');
+                document.querySelector(`.form-section[data-step="${prevStep}"]`).classList.add('active');
+            });
+        });
+        
+        // Form validation for each step
+        function validateStep(step) {
+            let isValid = true;
+            const currentSection = document.querySelector(`.form-section[data-step="${step}"]`);
+            
+            // Check all required fields in current section
+            const requiredFields = currentSection.querySelectorAll('[required]');
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    isValid = false;
+                    field.style.borderColor = 'var(--accent)';
+                    
+                    // Add error message if not already present
+                    if (!field.nextElementSibling || !field.nextElementSibling.classList.contains('error-message')) {
+                        const errorMsg = document.createElement('div');
+                        errorMsg.className = 'error-message';
+                        errorMsg.style.color = 'var(--accent)';
+                        errorMsg.style.fontSize = '0.85rem';
+                        errorMsg.style.marginTop = '5px';
+                        errorMsg.textContent = 'This field is required';
+                        field.parentNode.appendChild(errorMsg);
+                    }
+                } else {
+                    field.style.borderColor = '#e0e0e0';
+                    
+                    // Remove error message if exists
+                    if (field.nextElementSibling && field.nextElementSibling.classList.contains('error-message')) {
+                        field.nextElementSibling.remove();
+                    }
+                }
+            });
+            
+            return isValid;
+        }
+        
+        // Update review section with form data
+        function updateReviewSection() {
+            document.getElementById('review-child-name').textContent = document.getElementById('child-name').value || '-';
+            document.getElementById('review-child-age').textContent = document.getElementById('child-age').value || '-';
+            document.getElementById('review-child-gender').textContent = document.getElementById('child-gender').value || '-';
+            document.getElementById('review-parent-name').textContent = document.getElementById('parent-name').value || '-';
+            document.getElementById('review-email').textContent = document.getElementById('email').value || '-';
+            document.getElementById('review-phone').textContent = document.getElementById('phone').value || '-';
+            document.getElementById('review-relationship').textContent = document.getElementById('relationship').value || '-';
+            document.getElementById('review-experience').textContent = document.getElementById('experience').options[document.getElementById('experience').selectedIndex].text || '-';
+            document.getElementById('review-session').textContent = document.getElementById('session').options[document.getElementById('session').selectedIndex].text || '-';
+            document.getElementById('review-weeks').textContent = document.getElementById('week-selection').options[document.getElementById('week-selection').selectedIndex].text || '-';
+            document.getElementById('review-allergies').textContent = document.getElementById('allergies').value || 'None';
+        }
+        
+        // Registration form handling
+        document.getElementById('registration-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const registration = {
+                id: Date.now(), // Simple unique ID
+                childName: formData.get('child-name'),
+                childAge: formData.get('child-age'),
+                childGender: formData.get('child-gender'),
+                parentName: formData.get('parent-name'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                relationship: formData.get('relationship'),
+                experience: formData.get('experience'),
+                session: formData.get('session'),
+                weekSelection: formData.get('week-selection'),
+                allergies: formData.get('allergies'),
+                comments: formData.get('comments'),
+                registrationDate: new Date().toLocaleDateString()
+            };
+            
+            // Save to localStorage
+            let registrations = JSON.parse(localStorage.getItem('bootcampRegistrations') || '[]');
+            registrations.push(registration);
+            localStorage.setItem('bootcampRegistrations', JSON.stringify(registrations));
+            
+            // Show success message
+            const alertDiv = document.getElementById('registration-alert');
+            alertDiv.innerHTML = `
+                <div class="alert alert-success">
+                    <i class="fas fa-check-circle"></i>
+                    <div>
+                        <strong>Registration successful!</strong><br>
+                        We've received your application for ${registration.childName}. 
+                        You will receive a confirmation email shortly.
+                    </div>
+                </div>
+            `;
+            
+            // Reset form and progress
+            this.reset();
+            document.querySelectorAll('.progress-step').forEach(step => {
+                step.classList.remove('active', 'completed');
+            });
+            document.querySelector('.progress-step[data-step="1"]').classList.add('active');
+            
+            document.querySelectorAll('.form-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.querySelector('.form-section[data-step="1"]').classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        });
+        
+        // Admin login functionality
+        document.getElementById('admin-login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('admin-username').value;
+            const password = document.getElementById('admin-password').value;
+            
+            // Simple authentication (in a real app, this would be server-side)
+            if (username === 'admin' && password === 'bootcamp2026') {
+                document.getElementById('admin-content').style.display = 'block';
+                loadRegistrations();
+            } else {
+                alert('Invalid credentials. Please try again.');
+            }
+        });
+        
+        // Load and display registrations
+        function loadRegistrations() {
+            const registrations = JSON.parse(localStorage.getItem('bootcampRegistrations') || '[]');
+            const container = document.getElementById('registrations-table-container');
+            
+            if (registrations.length === 0) {
+                container.innerHTML = '<p>No registrations found.</p>';
+                return;
+            }
+            
+            let tableHTML = `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Child Name</th>
+                            <th>Age</th>
+                            <th>Parent Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Experience</th>
+                            <th>Session</th>
+                            <th>Registration Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            registrations.forEach(reg => {
+                tableHTML += `
+                    <tr>
+                        <td>${reg.id}</td>
+                        <td>${reg.childName}</td>
+                        <td>${reg.childAge}</td>
+                        <td>${reg.parentName}</td>
+                        <td>${reg.email}</td>
+                        <td>${reg.phone}</td>
+                        <td>${reg.experience}</td>
+                        <td>${reg.session}</td>
+                        <td>${reg.registrationDate}</td>
+                    </tr>
+                `;
+            });
+            
+            tableHTML += '</tbody></table>';
+            container.innerHTML = tableHTML;
+        }
+        
+        // Export data functionality
+        document.getElementById('export-data').addEventListener('click', function() {
+            const registrations = JSON.parse(localStorage.getItem('bootcampRegistrations') || '[]');
+            
+            if (registrations.length === 0) {
+                alert('No data to export.');
+                return;
+            }
+            
+            // Convert to CSV
+            const headers = ['ID', 'Child Name', 'Age', 'Parent Name', 'Email', 'Phone', 'Experience', 'Session', 'Registration Date'];
+            const csvContent = [
+                headers.join(','),
+                ...registrations.map(reg => [
+                    reg.id,
+                    `"${reg.childName}"`,
+                    reg.childAge,
+                    `"${reg.parentName}"`,
+                    reg.email,
+                    reg.phone,
+                    reg.experience,
+                    reg.session,
+                    reg.registrationDate
+                ].join(','))
+            ].join('\n');
+            
+            // Create download link
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'bootcamp-registrations.csv';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+    </script>
+</body>
+</html>
